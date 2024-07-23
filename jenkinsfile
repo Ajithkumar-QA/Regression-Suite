@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    environment {
+        // Set any environment variables required for the tests
+        PATH = "/usr/local/bin:/usr/bin:/bin:/path/to/chromedriver"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/Ajithkumar-QA/Regression-Suite.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install any dependencies (e.g., using Maven, Gradle, npm)
+                    sh 'mvn clean install' // Example for Maven
+                    // sh 'npm install' // Example for npm
+                }
+            }
+        }
+        stage('Run Selenium Tests') {
+            steps {
+                script {
+                    // Run Selenium tests
+                    sh 'mvn test' // Example for Maven
+                    // sh 'npm test' // Example for npm
+                }
+            }
+        }
+    }
+    post {
+        always {
+            // Archive test results, generate reports, etc.
+            archiveArtifacts artifacts: '**/target/*.xml', allowEmptyArchive: true
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
