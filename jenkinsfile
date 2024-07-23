@@ -1,21 +1,16 @@
 pipeline {
     agent any
-    environment {
-        // Set any environment variables required for the tests
-        PATH = "/usr/local/bin:/usr/bin:/bin:/path/to/chromedriver"
-    }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Ajithkumar-QA/Regression-Suite.git'
+                git branch: 'main', url: 'https://github.com/Ajithkumar-QA/Regression-Suite.git'
             }
         }
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install any dependencies (e.g., using Maven, Gradle, npm)
-                    sh 'mvn clean install' // Example for Maven
-                    // sh 'npm install' // Example for npm
+                    // Install dependencies
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -23,8 +18,7 @@ pipeline {
             steps {
                 script {
                     // Run Selenium tests
-                    sh 'mvn test' // Example for Maven
-                    // sh 'npm test' // Example for npm
+                    sh 'mvn test'
                 }
             }
         }
