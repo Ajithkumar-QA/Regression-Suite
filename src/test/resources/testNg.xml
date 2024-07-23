@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Smoke"></test>
+    <test name="C:\Users\vagad\IdeaProjects\demoNopeCommerceReal">
+        <classes>
+            <class name="com.nopecommercedemo.cucumber.RegressionRunner"></class>
+        </classes>
+    </test>
+</suite>
